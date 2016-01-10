@@ -98,10 +98,10 @@ data base1;
     x&&varb&i=&&varb&i/lag(&&varb&i);
   %end;
   %do i=1 %to &varbn;
-  x2&&varb&i=x&&varb&i ** 2;
-  x3&&varb&i=x&&varb&i ** 3;
-  x4&&varb&i=x&&varb&i ** 4;
-  x5&&varb&i=x&&varb&i ** 5;
+	x2&&varb&i=x&&varb&i ** 2;
+	x3&&varb&i=x&&varb&i ** 3;
+	x4&&varb&i=x&&varb&i ** 4;
+	x5&&varb&i=x&&varb&i ** 5;
   %end;
   
   if ^first.code then output;
@@ -111,7 +111,7 @@ data base_n1(keep=n n_old_new i rename=(n=n_by));
   set base1(where=(xa-lag_xa>0.01 and xa>0 and lag_xa<0 and v_ma20>1e4 and out1<1e3 and 5<open<60));
   do i=-&m to &n;
     n_old_new=n+i;
-  output;
+	output;
   end;
 run;
 

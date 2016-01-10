@@ -1,4 +1,4 @@
-﻿
+
 data base1;
   set base0;
   by code;
