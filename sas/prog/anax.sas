@@ -51,7 +51,6 @@ create table base02 as
 ;quit;
 
 
-
 *--------------------combine data---------------------------------------------------;
 data _null_;
   length varab var $190;
@@ -147,7 +146,7 @@ order by n_by
   code=strip(code)||')';
 %mend;
 
-data code;
+data exe;
   length code code1 $32767 i_var $3;
   *data base3 where= ...;
   code='data base3(where=(';
@@ -168,7 +167,7 @@ data code;
 run;
 
 data _null_;
-  set code;
+  set exe;
   call execute(code1);
   call execute(code);
 run;
@@ -248,7 +247,7 @@ order by 1;quit;
 *-----------------------------cross------------------------------------------;
 data cross0;
 length out $100;
-infile "C:\python\report\red_cross.txt" dlm=';';
+infile "C:\python\report\red_cross.txt" dlm=';'; *encoding="utf-8";
 input out $;
 run;
 
@@ -259,7 +258,7 @@ where open<=min(ma5,ma10,ma20) and close>max(ma5,ma10,ma20) and 5<open<60 and nm
 and date=input("&date",yymmdd10.);
 out=cat("&date  ",code,name,put(open,7.2),put(ma5,7.2),put(ma10,7.2),put(ma20,7.2),put(close,7.2));
 output;
-if eof then do; out="&date  "||"code     name     open    ma5   ma10   ma20  close"; output; end;
+if eof then do; out="&date  "||"code      name     open    ma5   ma10   ma20  close"; output; end;
 keep out;
 proc sort; by out; run;
 
@@ -269,7 +268,7 @@ proc sort nodupkey; by descending out; run;
 
 data _null_;
 set cross2;
-file "C:\python\report\red_cross.txt";
+file "C:\python\report\red_cross.txt" encoding="utf-8";
 put out;
 run;
 
